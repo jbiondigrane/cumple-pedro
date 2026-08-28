@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cumple de Pedro 🎂</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #d6eef5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ---- BOTÓN VOLVER ATRÁS FIJO ---- */
+    #btn-volver-fijo {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: transparent;
+      color: #e53935;
+      border: none;
+      padding: 0;
+      font-size: 15px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: font-weight 0.1s;
+      z-index: 100;
+    }
+
+    #btn-volver-fijo:hover {
+      font-weight: 700;
+    }
+
+    /* ---- PANTALLA BIENVENIDA ---- */
+    #pantalla-bienvenida {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .guirnalda {
+      width: 100%;
+      max-width: 520px;
+      margin-bottom: -30px;
+      position: relative;
+      z-index: 0;
+    }
+
+    h1 {
+      font-size: clamp(28px, 6vw, 52px);
+      color: #0d47a1;
+      line-height: 1.3;
+      margin-bottom: 20px;
+      text-shadow: 1px 2px 4px rgba(255,255,255,0.4);
+      position: relative;
+      z-index: 1;
+    }
+
+    .subtitulo {
+      font-size: clamp(16px, 3vw, 22px);
+      color: #1565c0;
+      margin-bottom: 40px;
+    }
+
+    .save-the-date {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .std-titulo {
+      font-size: clamp(14px, 2.5vw, 18px);
+      font-style: normal;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #1565c0;
+      margin-bottom: 14px;
+    }
+
+    .std-fechas {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+    }
+
+    .std-fecha {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .std-bandera {
+      font-size: 36px;
+    }
+
+    .std-info {
+      font-size: clamp(15px, 2.5vw, 18px);
+      font-weight: 600;
+      color: #0d47a1;
+    }
+
+    .btn-continuar {
+      background-color: #0d47a1;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 16px 48px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(13,71,161,0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-continuar:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(13,71,161,0.45);
+    }
+
+    .btn-continuar:active {
+      transform: translateY(0);
+    }
+
+    /* ---- PANTALLA MENÚ ---- */
+    #pantalla-menu {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      min-height: 100vh;
+      position: relative;
+      animation: fadeIn 0.5s ease;
+    }
+
+    #shared-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: 23.6vw;
+      overflow: hidden;
+      z-index: 0;
+      background: white;
+    }
+
+    #shared-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.18;
+    }
+
+    #menu-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #pantalla-menu h2 {
+      font-size: clamp(22px, 5vw, 34px);
+      color: #0d47a1;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .menu-opciones {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .menu-btn {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: white;
+      border: none;
+      border-radius: 16px;
+      padding: 20px 24px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #0d47a1;
+      cursor: pointer;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+      transition: transform 0.15s, box-shadow 0.15s;
+      text-align: left;
+      width: 100%;
+    }
+
+    .menu-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    }
+
+    .menu-btn:active {
+      transform: translateY(0);
+    }
+
+    .menu-btn .icono {
+      font-size: 32px;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .icono-img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      min-width: 48px;
+    }
+
+    /* ---- PANTALLAS SECCIONES ---- */
+    .seccion {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 24px;
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .seccion h2 {
+      font-size: clamp(22px, 5vw, 32px);
+      color: #0d47a1;
+      margin-bottom: 20px;
+    }
+
+    .seccion p {
+      color: #1565c0;
+      font-size: 16px;
+      margin-bottom: 24px;
+    }
+
+    .btn-volver {
+      margin-top: 24px;
+      background: transparent;
+      border: 2px solid #0d47a1;
+      color: #0d47a1;
+      border-radius: 50px;
+      padding: 12px 32px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-volver:hover {
+      background: #0d47a1;
+      color: white;
+    }
+
+    /* Galería meses */
+    #seccion-galeria {
+      max-width: 100%;
+    }
+
+    #galeria-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .meses-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      width: 70vw;
+      max-width: 800px;
+      padding: 0 16px;
+    }
+
+    .mes-card {
+      background: white;
+      border-radius: 14px;
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .mes-card:hover {
+      transform: scale(1.04);
+    }
+
+    .mes-num {
+      font-size: clamp(28px, 6vw, 48px);
+      font-weight: 700;
+      color: #0d47a1;
+      line-height: 1;
+    }
+
+    .mes-label {
+      font-size: clamp(12px, 2.5vw, 16px);
+      color: #4a90b8;
+      margin-top: 4px;
+    }
+
+    /* Formulario asistencia */
+    .form-asistencia {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .form-asistencia input,
+    .form-asistencia select {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 2px solid #90caf9;
+      font-size: 16px;
+      outline: none;
+      background: white;
+      color: #0d47a1;
+    }
+
+    .form-asistencia input:focus,
+    .form-asistencia select:focus {
+      border-color: #0d47a1;
+    }
+
+    .pais-selector {
+      display: flex;
+      gap: 12px;
+    }
+
+    .pais-btn {
+      flex: 1;
+      padding: 14px;
+      border-radius: 12px;
+      border: 2px solid #90caf9;
+      background: white;
+      font-size: 16px;
+      font-weight: 600;
+      color: #0d47a1;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .pais-btn.activo {
+      border-color: #0d47a1;
+      background: #e8f0fe;
+    }
+
+    .recordatorio {
+      background: #e8f0fe;
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: #0d47a1;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .btn-confirmar {
+      background: #0d47a1;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    /* Mapa placeholder */
+    .mapa-placeholder {
+      width: 100%;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.6);
+      padding: 20px;
+      color: #1565c0;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    /* Fotos del mes */
+    #seccion-fotos-mes {
+      max-width: 100%;
+    }
+
+    #fotos-mes-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    #fotos-mes-content h2 {
+      color: #0d47a1;
+      margin-bottom: 20px;
+      font-size: clamp(20px, 4vw, 28px);
+    }
+
+    .fotos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      width: 90vw;
+      max-width: 800px;
+    }
+
+    .fotos-grid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .fotos-grid img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+
+    #lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      color: white;
+      font-size: 36px;
+      cursor: pointer;
+      line-height: 1;
+      background: none;
+      border: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FONDO MOSAICO COMPARTIDO -->
+  <div id="shared-bg"></div>
+
+  <!-- BOTÓN VOLVER FIJO -->
+  <button id="btn-volver-fijo" onclick="volverAtras()">← Volver</button>
+
+  <!-- BIENVENIDA -->
+  <div id="pantalla-bienvenida">
+    <img src="guirnalda_transp.png" alt="guirnalda" class="guirnalda" />
+    <h1>Bienvenidos al primer cumpleaños de Pedri</h1>
+    <div class="save-the-date">
+      <p class="std-titulo">Save the date</p>
+      <div class="std-fechas">
+        <div class="std-fecha">
+          <span class="std-bandera">🇺🇾</span>
+          <span class="std-info">19/09 · 12hs</span>
+        </div>
+        <div class="std-fecha">
+          <span class="std-bandera">🇦🇷</span>
+          <span class="std-info">26/09 · 12hs</span>
+        </div>
+      </div>
+    </div>
+    <button class="btn-continuar" onclick="mostrar('menu')">Continuar →</button>
+  </div>
+
+  <!-- MENÚ -->
+  <div id="pantalla-menu">
+    <div id="menu-bg"></div>
+    <div id="menu-content">
+<div class="menu-opciones">
+        <button class="menu-btn" onclick="mostrar('asistencia')">
+          <span class="icono">✅</span>
+          <span>Confirmar asistencia</span>
+        </button>
+        <button class="menu-btn" onclick="mostrar('llegar')">
+          <span class="icono">📍</span>
+          <span>Cómo llegar</span>
+        </button>
+        <button class="menu-btn" onclick="mostrar('galeria')">
+          <img src="camara_transp.png" class="icono-img" alt="cámara" />
+          <span>Ir a galería de fotos</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALERÍA -->
+  <div id="seccion-galeria" class="seccion">
+    <div id="galeria-content">
+      <div class="meses-grid">
+        <div class="mes-card" onclick="abrirMes(1)"><span class="mes-num">1</span><span class="mes-label">mes</span></div>
+        <div class="mes-card" onclick="abrirMes(2)"><span class="mes-num">2</span><span class="mes-label">meses</span></div>
+        <div class="mes-card" onclick="abrirMes(3)"><span class="mes-num">3</span><span class="mes-label">meses</span></div>
+        <div class="mes-card" onclick="abrirMes(4)"><span class="mes-num">4</span><span class="mes-label">meses</span></div>
+        <div class="mes-card"><span class="mes-num">5</span><span class="mes-label">meses</span></div>
+        <div class="mes-card"><span class="mes-num">6</span><span class="mes-label">meses</span></div>
+        <div class="mes-card"><span class="mes-num">7</span><span class="mes-label">meses</span></div>
+        <div class="mes-card"><span class="mes-num">8</span><span class="mes-label">meses</span></div>
+        <div class="mes-card"><span class="mes-num">9</span><span class="mes-label">meses</span></div>
+        <div class="mes-card"><span class="mes-num">10</span><span class="mes-label">meses</span></div>
+        <div class="mes-card"><span class="mes-num">11</span><span class="mes-label">meses</span></div>
+        <div class="mes-card"><span class="mes-num">12</span><span class="mes-label">meses</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOTOS DEL MES -->
+  <div id="seccion-fotos-mes" class="seccion">
+    <div id="fotos-mes-content">
+      <h2 id="fotos-mes-titulo">📸 1 mes</h2>
+      <div class="fotos-grid" id="fotos-grid"></div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" onclick="cerrarLightbox()">
+    <button id="lightbox-close" onclick="cerrarLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <!-- ASISTENCIA -->
+  <div id="seccion-asistencia" class="seccion">
+    <h2>✅ Confirmar asistencia</h2>
+    <div class="form-asistencia">
+
+      <p style="font-weight:600; color:#0d47a1; margin-bottom:4px;">¿Dónde vas a asistir?</p>
+      <div class="pais-selector">
+        <button type="button" class="pais-btn" id="btn-uru" onclick="seleccionarPais('uru')">
+          🇺🇾 Uruguay
+        </button>
+        <button type="button" class="pais-btn" id="btn-arg" onclick="seleccionarPais('arg')">
+          🇦🇷 Argentina
+        </button>
+      </div>
+
+      <div id="recordatorio-fecha" class="recordatorio" style="display:none;"></div>
+
+      <input type="text" placeholder="Tu nombre" />
+      <input type="number" placeholder="¿Cuántos vienen?" min="1" max="10" />
+      <select>
+        <option value="">¿Confirmas asistencia?</option>
+        <option value="si">Sí, voy 🎉</option>
+        <option value="no">No puedo ir 😢</option>
+      </select>
+      <textarea placeholder="¿Algo para tener en cuenta? (opcional)" rows="3" style="width:100%; padding:14px 16px; border-radius:12px; border:2px solid #90caf9; font-size:16px; outline:none; font-family:inherit; resize:none; color:#0d47a1;"></textarea>
+      <button class="btn-confirmar">Confirmar</button>
+    </div>
+  </div>
+
+  <!-- CÓMO LLEGAR -->
+  <div id="seccion-llegar" class="seccion">
+    <h2>📍 Cómo llegar</h2>
+
+    <div class="form-asistencia" style="width:100%;">
+      <p style="font-weight:600; color:#0d47a1; margin-bottom:4px;">¿A cuál evento vas?</p>
+      <div class="pais-selector">
+        <button type="button" class="pais-btn" id="btn-llegar-uru" onclick="seleccionarLlegar('uru')">🇺🇾 Uruguay</button>
+        <button type="button" class="pais-btn" id="btn-llegar-arg" onclick="seleccionarLlegar('arg')">🇦🇷 Argentina</button>
+      </div>
+    </div>
+
+    <div id="llegar-info" style="display:none; width:100%; margin-top:20px;">
+      <div class="recordatorio" id="llegar-fecha" style="margin-bottom:16px;"></div>
+      <div class="mapa-placeholder" style="margin-bottom:12px;">
+        <p id="llegar-direccion" style="font-size:15px; font-weight:600; color:#0d47a1;"></p>
+      </div>
+      <iframe id="llegar-mapa" width="100%" height="200" style="border:0; border-radius:16px;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <a id="llegar-link" href="#" target="_blank" class="btn-confirmar" style="display:block; text-decoration:none; text-align:center; margin-top:12px;">Abrir en Google Maps →</a>
+    </div>
+  </div>
+
+  <script>
+    // Llenar fondo mosaico compartido
+    const fotos = ['1.jpeg','2.jpeg','3.jpeg','4.jpeg','5.jpeg','6.jpeg'];
+    const sharedBg = document.getElementById('shared-bg');
+    for (let i = 0; i < 54; i++) {
+      const img = document.createElement('img');
+      img.src = fotos[i % fotos.length];
+      sharedBg.appendChild(img);
+    }
+
+    const lugares = {
+      uru: {
+        fecha: '📅 19 de septiembre · 12hs 🇺🇾',
+        dir: 'Av. María Saldún de Rodríguez 2350, Montevideo, Uruguay',
+        maps: 'Av.+Mar%C3%ADa+Saldu%CC%81n+de+Rodr%C3%ADguez+2350,+Montevideo,+Uruguay',
+      },
+      arg: {
+        fecha: '📅 26 de septiembre · 12hs 🇦🇷',
+        dir: 'Rocamora 409, Concepción del Uruguay, Entre Ríos, Argentina',
+        maps: 'Rocamora+409,+Concepci%C3%B3n+del+Uruguay,+Entre+R%C3%ADos,+Argentina',
+      }
+    };
+
+    function seleccionarLlegar(pais) {
+      document.getElementById('btn-llegar-uru').classList.toggle('activo', pais === 'uru');
+      document.getElementById('btn-llegar-arg').classList.toggle('activo', pais === 'arg');
+      const l = lugares[pais];
+      document.getElementById('llegar-fecha').innerHTML = l.fecha;
+      document.getElementById('llegar-direccion').textContent = '📌 ' + l.dir;
+      const mapsUrl = 'https://maps.google.com/maps?q=' + l.maps;
+      document.getElementById('llegar-mapa').src = mapsUrl + '&output=embed';
+      document.getElementById('llegar-link').href = mapsUrl;
+      document.getElementById('llegar-info').style.display = 'block';
+    }
+
+    function seleccionarPais(pais) {
+      document.getElementById('btn-uru').classList.toggle('activo', pais === 'uru');
+      document.getElementById('btn-arg').classList.toggle('activo', pais === 'arg');
+      const rec = document.getElementById('recordatorio-fecha');
+      if (pais === 'uru') {
+        rec.innerHTML = '📅 19 de septiembre · 12hs 🇺🇾';
+      } else {
+        rec.innerHTML = '📅 26 de septiembre · 12hs 🇦🇷';
+      }
+      rec.style.display = 'block';
+    }
+
+    const historial = ['bienvenida'];
+
+    // Fotos por mes
+    const fotosPorMes = {
+      1: Array.from({length: 20}, (_, i) => `1_mes/foto_${i+1}.jpeg`),
+      2: Array.from({length: 16}, (_, i) => `2_mes/foto_${i+1}.jpeg`),
+      3: Array.from({length: 20}, (_, i) => `3_mes/foto_${i+1}.jpeg`),
+      4: Array.from({length: 31}, (_, i) => `4_mes/foto_${i+1}.jpeg`),
+    };
+
+    function abrirMes(num) {
+      const fotos = fotosPorMes[num];
+      if (!fotos) return;
+      const label = num === 1 ? '1 mes' : `${num} meses`;
+      document.getElementById('fotos-mes-titulo').textContent = `📸 ${label}`;
+      const grid = document.getElementById('fotos-grid');
+      grid.innerHTML = '';
+      fotos.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.onclick = (e) => { e.stopPropagation(); abrirLightbox(src); };
+        grid.appendChild(img);
+      });
+      mostrar('fotos-mes');
+    }
+
+    function abrirLightbox(src) {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = src;
+      lb.style.display = 'flex';
+    }
+
+    function cerrarLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    const ids = {
+      bienvenida:  'pantalla-bienvenida',
+      menu:        'pantalla-menu',
+      galeria:     'seccion-galeria',
+      'fotos-mes': 'seccion-fotos-mes',
+      asistencia:  'seccion-asistencia',
+      llegar:      'seccion-llegar',
+    };
+
+    function mostrar(pantalla) {
+      historial.push(pantalla);
+      renderPantalla(pantalla);
+    }
+
+    function volverAtras() {
+      if (historial.length <= 1) return;
+      historial.pop();
+      renderPantalla(historial[historial.length - 1]);
+    }
+
+    function renderPantalla(pantalla) {
+      Object.values(ids).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+
+      const el = document.getElementById(ids[pantalla]);
+      if (el) el.style.display = 'flex';
+
+      const btnVolver = document.getElementById('btn-volver-fijo');
+      btnVolver.style.display = (pantalla === 'bienvenida') ? 'none' : 'block';
+
+      const bg = document.getElementById('shared-bg');
+      const sinFondo = ['bienvenida', 'fotos-mes'];
+      bg.style.display = sinFondo.includes(pantalla) ? 'none' : 'grid';
+    }
+  </script>
+</body>
+</html>
