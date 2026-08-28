@@ -593,15 +593,15 @@
 
       <div id="recordatorio-fecha" class="recordatorio" style="display:none;"></div>
 
-      <input type="text" placeholder="Tu nombre" />
-      <input type="number" placeholder="¿Cuántos vienen?" min="1" max="10" />
-      <select>
+      <input type="text" id="asist-nombre" placeholder="Tu nombre" />
+      <input type="number" id="asist-cantidad" placeholder="¿Cuántos vienen?" min="1" max="10" />
+      <select id="asist-confirma">
         <option value="">¿Confirmas asistencia?</option>
-        <option value="si">Sí, voy 🎉</option>
-        <option value="no">No puedo ir 😢</option>
+        <option value="Sí, voy 🎉">Sí, voy 🎉</option>
+        <option value="No puedo ir 😢">No puedo ir 😢</option>
       </select>
-      <textarea placeholder="¿Algo para tener en cuenta? (opcional)" rows="3" style="width:100%; padding:14px 16px; border-radius:12px; border:2px solid #90caf9; font-size:16px; outline:none; font-family:inherit; resize:none; color:#0d47a1;"></textarea>
-      <button class="btn-confirmar">Confirmar</button>
+      <textarea id="asist-comentario" placeholder="¿Algo para tener en cuenta? (opcional)" rows="3" style="width:100%; padding:14px 16px; border-radius:12px; border:2px solid #90caf9; font-size:16px; outline:none; font-family:inherit; resize:none; color:#0d47a1;"></textarea>
+      <button class="btn-confirmar" onclick="enviarConfirmacion()">Confirmar</button>
     </div>
   </div>
 
@@ -662,7 +662,10 @@
       document.getElementById('llegar-info').style.display = 'block';
     }
 
+    let paisAsistenciaSeleccionado = '';
+
     function seleccionarPais(pais) {
+      paisAsistenciaSeleccionado = pais === 'uru' ? 'Uruguay' : 'Argentina';
       document.getElementById('btn-uru').classList.toggle('activo', pais === 'uru');
       document.getElementById('btn-arg').classList.toggle('activo', pais === 'arg');
       const rec = document.getElementById('recordatorio-fecha');
@@ -672,6 +675,34 @@
         rec.innerHTML = '📅 26 de septiembre · 12hs 🇦🇷';
       }
       rec.style.display = 'block';
+    }
+
+    function enviarConfirmacion() {
+      const nombre = document.getElementById('asist-nombre').value.trim();
+      const cantidad = document.getElementById('asist-cantidad').value.trim();
+      const confirma = document.getElementById('asist-confirma').value;
+      const comentario = document.getElementById('asist-comentario').value.trim();
+
+      if (!paisAsistenciaSeleccionado) {
+        alert('Elegí primero si venís a Uruguay o Argentina');
+        return;
+      }
+      if (!nombre || !confirma) {
+        alert('Completá tu nombre y si confirmás asistencia');
+        return;
+      }
+
+      const destinatario = 'josefinabg@hotmail.com';
+      const asunto = `Confirmación cumple Pedro - ${nombre}`;
+      const cuerpo =
+        `País: ${paisAsistenciaSeleccionado}\n` +
+        `Nombre: ${nombre}\n` +
+        `Cuántos vienen: ${cantidad || '-'}\n` +
+        `Confirma: ${confirma}\n` +
+        `Comentario: ${comentario || '-'}`;
+
+      const mailtoUrl = `mailto:${destinatario}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+      window.location.href = mailtoUrl;
     }
 
     const historial = ['bienvenida'];
