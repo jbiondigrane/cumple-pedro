@@ -794,14 +794,25 @@
 
     function mostrar(pantalla) {
       historial.push(pantalla);
+      history.pushState({ pantalla }, '', location.pathname + location.search);
       renderPantalla(pantalla);
     }
 
     function volverAtras() {
       if (historial.length <= 1) return;
-      historial.pop();
-      renderPantalla(historial[historial.length - 1]);
+      history.back();
     }
+
+    window.addEventListener('popstate', (e) => {
+      cerrarLightbox();
+      const pantalla = (e.state && e.state.pantalla) || 'bienvenida';
+      if (historial.length > 1 && historial[historial.length - 1] !== pantalla) {
+        historial.pop();
+      }
+      renderPantalla(pantalla);
+    });
+
+    history.replaceState({ pantalla: 'bienvenida' }, '', location.pathname + location.search);
 
     function renderPantalla(pantalla) {
       Object.values(ids).forEach(id => {
