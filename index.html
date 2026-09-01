@@ -825,6 +825,8 @@
       const btnVolver = document.getElementById('btn-volver-fijo');
       btnVolver.style.display = (pantalla === 'bienvenida') ? 'none' : 'block';
 
+      document.body.style.backgroundColor = (pantalla === 'bienvenida') ? '#d6eef5' : '#ffffff';
+
       const bg = document.getElementById('shared-bg');
       const sinFondo = ['bienvenida', 'fotos-mes'];
       if (sinFondo.includes(pantalla)) {
