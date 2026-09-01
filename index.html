@@ -359,6 +359,24 @@
       padding: 0 16px;
     }
 
+    .btn-subir-fotos {
+      display: inline-block;
+      margin-top: 16px;
+      background: #0d47a1;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 12px 28px;
+      border-radius: 50px;
+      box-shadow: 0 3px 12px rgba(13,71,161,0.3);
+      transition: transform 0.15s;
+    }
+
+    .btn-subir-fotos:hover {
+      transform: translateY(-2px);
+    }
+
     /* Formulario asistencia */
     .form-asistencia {
       width: 100%;
@@ -589,9 +607,10 @@
         <div class="mes-card" onclick="abrirMes(12)"><span class="mes-num">12</span><span class="mes-label">meses</span></div>
       </div>
       <p class="mensaje-fotos">
-        ¿Tenés más fotos para completar mi álbum y no las ves acá? Compartiselas a mi mamá o a mi papá así las pueden subir!!!<br>
+        ¿Tenés más fotos para completar mi álbum y no las ves acá? Subilas vos mismo así las pueden agregar!!!<br>
         Gracias, Pedri
       </p>
+      <a href="https://forms.gle/MHhd8HkYwVF8S2qT6" target="_blank" class="btn-subir-fotos">📤 Subir fotos</a>
     </div>
   </div>
 
