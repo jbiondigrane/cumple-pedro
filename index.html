@@ -331,29 +331,41 @@
       margin-bottom: 20px;
     }
 
-    #seccion-asistencia, #seccion-asistencia * {
-      font-family: 'Oswald', sans-serif !important;
+    #seccion-asistencia * {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     #seccion-asistencia h2 {
+      font-family: 'Oswald', sans-serif;
       font-weight: 300;
       letter-spacing: 3px;
       text-transform: uppercase;
-      font-size: clamp(26px, 6vw, 38px);
+      font-size: 22px;
       margin-bottom: 0;
     }
 
     .titulo-con-animal {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
       margin-bottom: 20px;
+      overflow: visible;
     }
 
     .animal-titulo-derecha {
-      height: 70px;
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translate(60%, -50%);
+      height: 140px;
       width: auto;
+    }
+
+    @media (max-width: 700px) {
+      #seccion-asistencia h2 {
+        font-size: 19px;
+      }
     }
 
     .seccion p {
@@ -508,7 +520,7 @@
       border-radius: 12px;
       border: 2px solid #90caf9;
       background: white;
-      font-size: 16px;
+      font-size: 22px;
       font-weight: 600;
       color: #0d47a1;
       cursor: pointer;
