@@ -881,8 +881,9 @@
         'END:VCALENDAR',
       ].join('\r\n');
 
-      const icsUri = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
-      window.location.href = icsUri;
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      window.location.href = url;
     }
 
     function seleccionarPais(pais) {
