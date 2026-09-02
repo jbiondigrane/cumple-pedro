@@ -219,6 +219,10 @@
       transform: translateX(4px);
     }
 
+    .menu-fila-derecha {
+      justify-content: space-between;
+    }
+
     .menu-fila span {
       font-size: 20px;
       font-weight: 700;
@@ -226,8 +230,9 @@
     }
 
     .menu-animal {
-      height: 90px;
-      width: auto;
+      width: 16.67vw;
+      height: 23.6vw;
+      object-fit: contain;
       flex-shrink: 0;
     }
 
@@ -237,7 +242,8 @@
       }
 
       .menu-animal {
-        height: 70px;
+        width: 33.3vw;
+        height: 47.2vw;
       }
     }
 
@@ -590,9 +596,9 @@
           <img src="menu_transp.png" alt="oso con torta" class="menu-animal" />
           <span>Confirmar asistencia</span>
         </div>
-        <div class="menu-fila" onclick="mostrar('llegar')">
-          <img src="cebra_transp.png" alt="cebra" class="menu-animal" />
+        <div class="menu-fila menu-fila-derecha" onclick="mostrar('llegar')">
           <span>Cómo llegar</span>
+          <img src="cebra_transp.png" alt="cebra" class="menu-animal" />
         </div>
         <div class="menu-fila" onclick="mostrar('galeria')">
           <img src="jirafa_transp.png" alt="jirafa" class="menu-animal" />
