@@ -335,7 +335,8 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    #seccion-asistencia h2 {
+    #seccion-asistencia h2,
+    #seccion-llegar h2 {
       font-family: 'Oswald', sans-serif;
       font-weight: 300;
       letter-spacing: 3px;
@@ -374,7 +375,8 @@
     }
 
     @media (max-width: 700px) {
-      #seccion-asistencia h2 {
+      #seccion-asistencia h2,
+      #seccion-llegar h2 {
         font-size: 19px;
       }
     }
@@ -805,11 +807,10 @@
 
   <!-- CÓMO LLEGAR -->
   <div id="seccion-llegar" class="seccion">
-    <img src="cebra_transp.png" alt="cebra" style="height:160px; width:auto; display:block; margin:0 auto 12px auto;" />
+    <img src="cebra_transp.png" alt="cebra" style="height:260px; width:auto; display:block; margin:0 auto 12px auto;" />
     <h2>Cómo llegar</h2>
 
     <div class="form-asistencia" style="width:100%;">
-      <p style="font-weight:600; color:#0d47a1; margin-bottom:4px;">¿A cuál evento vas?</p>
       <div class="pais-selector">
         <button type="button" class="pais-btn" id="btn-llegar-uru" onclick="seleccionarLlegar('uru')">🇺🇾 Uruguay</button>
         <button type="button" class="pais-btn" id="btn-llegar-arg" onclick="seleccionarLlegar('arg')">🇦🇷 Argentina</button>
