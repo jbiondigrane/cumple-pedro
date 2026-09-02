@@ -455,6 +455,14 @@
       transform: scale(1.04);
     }
 
+    .mes-card-bloqueada {
+      background: #f0f0f0;
+    }
+
+    .mes-card-bloqueada .mes-num {
+      font-size: clamp(24px, 5vw, 36px);
+    }
+
     .mes-num {
       font-size: clamp(28px, 6vw, 48px);
       font-weight: 700;
@@ -727,18 +735,19 @@
   <div id="seccion-galeria" class="seccion">
     <div id="galeria-content">
       <div class="meses-grid">
-        <div class="mes-card" onclick="abrirMes(1)"><span class="mes-num">1</span><span class="mes-label">mes</span></div>
-        <div class="mes-card" onclick="abrirMes(2)"><span class="mes-num">2</span><span class="mes-label">meses</span></div>
-        <div class="mes-card" onclick="abrirMes(3)"><span class="mes-num">3</span><span class="mes-label">meses</span></div>
-        <div class="mes-card" onclick="abrirMes(4)"><span class="mes-num">4</span><span class="mes-label">meses</span></div>
-        <div class="mes-card" onclick="abrirMes(5)"><span class="mes-num">5</span><span class="mes-label">meses</span></div>
-        <div class="mes-card" onclick="abrirMes(6)"><span class="mes-num">6</span><span class="mes-label">meses</span></div>
-        <div class="mes-card" onclick="abrirMes(7)"><span class="mes-num">7</span><span class="mes-label">meses</span></div>
-        <div class="mes-card" onclick="abrirMes(8)"><span class="mes-num">8</span><span class="mes-label">meses</span></div>
-        <div class="mes-card" onclick="abrirMes(9)"><span class="mes-num">9</span><span class="mes-label">meses</span></div>
-        <div class="mes-card" onclick="abrirMes(10)"><span class="mes-num">10</span><span class="mes-label">meses</span></div>
-        <div class="mes-card" onclick="abrirMes(11)"><span class="mes-num">11</span><span class="mes-label">meses</span></div>
-        <div class="mes-card" onclick="abrirMes(12)"><span class="mes-num">12</span><span class="mes-label">meses</span></div>
+        <div class="mes-card" onclick="abrirMes(1)"><span class="mes-num">0</span><span class="mes-label">meses</span></div>
+        <div class="mes-card" onclick="abrirMes(2)"><span class="mes-num">1</span><span class="mes-label">mes</span></div>
+        <div class="mes-card" onclick="abrirMes(3)"><span class="mes-num">2</span><span class="mes-label">meses</span></div>
+        <div class="mes-card" onclick="abrirMes(4)"><span class="mes-num">3</span><span class="mes-label">meses</span></div>
+        <div class="mes-card" onclick="abrirMes(5)"><span class="mes-num">4</span><span class="mes-label">meses</span></div>
+        <div class="mes-card" onclick="abrirMes(6)"><span class="mes-num">5</span><span class="mes-label">meses</span></div>
+        <div class="mes-card" onclick="abrirMes(7)"><span class="mes-num">6</span><span class="mes-label">meses</span></div>
+        <div class="mes-card" onclick="abrirMes(8)"><span class="mes-num">7</span><span class="mes-label">meses</span></div>
+        <div class="mes-card" onclick="abrirMes(9)"><span class="mes-num">8</span><span class="mes-label">meses</span></div>
+        <div class="mes-card" onclick="abrirMes(10)"><span class="mes-num">9</span><span class="mes-label">meses</span></div>
+        <div class="mes-card" onclick="abrirMes(11)"><span class="mes-num">10</span><span class="mes-label">meses</span></div>
+        <div class="mes-card" onclick="abrirMes(12)"><span class="mes-num">11</span><span class="mes-label">meses</span></div>
+        <div class="mes-card mes-card-bloqueada" onclick="mesBloqueado()"><span class="mes-num">🔒</span><span class="mes-label">12 meses</span></div>
       </div>
       <p class="mensaje-fotos">
         ¿Tenés más fotos para completar mi álbum?<br>
@@ -957,6 +966,10 @@
       11: Array.from({length: 16}, (_, i) => `11_mes/foto_${i+1}.jpeg`),
       12: Array.from({length: 19}, (_, i) => `12_mes/foto_${i+1}.jpeg`),
     };
+
+    function mesBloqueado() {
+      alert('Se desbloquea el 16/09 🔒');
+    }
 
     function abrirMes(num) {
       const fotos = fotosPorMes[num];
