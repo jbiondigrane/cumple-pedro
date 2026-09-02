@@ -59,6 +59,7 @@
       text-align: center;
       padding: 24px;
       animation: fadeIn 0.8s ease;
+      transform: translateY(-0.5cm);
     }
 
     .hero-lion {
@@ -833,15 +834,8 @@
         'END:VCALENDAR',
       ].join('\r\n');
 
-      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `cumple-pedro-${pais}.ics`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      const icsUri = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+      window.location.href = icsUri;
     }
 
     function seleccionarPais(pais) {
