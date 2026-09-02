@@ -67,12 +67,6 @@
       margin-bottom: 12px;
     }
 
-    @media (max-width: 700px) {
-      .hero-lion {
-        max-width: 280px;
-        margin-bottom: 6px;
-      }
-    }
 
     h1 {
       font-size: clamp(24px, 5vw, 38px);
@@ -217,8 +211,12 @@
 
     .menu-guirnalda {
       width: calc(100% + 40px);
-      max-width: 520px;
+      height: 90px;
       margin: 0 -20px 12px -20px;
+      background-image: url('guirnarldas_transp.png');
+      background-repeat: repeat-x;
+      background-size: auto 100%;
+      background-position: left center;
     }
 
     .menu-opciones {
@@ -252,8 +250,8 @@
 
     .menu-animales-abajo {
       width: calc(100% + 40px);
-      max-width: 520px;
-      margin: 0 -20px;
+      max-width: 600px;
+      margin: 0 -20px 1cm -20px;
     }
 
     @media (max-width: 700px) {
@@ -263,14 +261,14 @@
 
       .menu-guirnalda {
         width: calc(100% + 20px);
-        max-width: 320px;
+        height: 60px;
         margin: 0 -10px 8px -10px;
       }
 
       .menu-animales-abajo {
         width: calc(100% + 20px);
-        max-width: 300px;
-        margin: 0 -10px;
+        max-width: 380px;
+        margin: 0 -10px 1cm -10px;
       }
 
       .menu-opciones {
@@ -634,7 +632,7 @@
   <div id="pantalla-menu">
     <div id="menu-bg"></div>
     <div id="menu-content">
-      <img src="guirnarldas_transp.png" alt="guirnalda" class="menu-guirnalda" />
+      <div class="menu-guirnalda"></div>
       <div class="menu-opciones">
         <div class="menu-fila" onclick="mostrar('asistencia')">
           <span>Confirmar asistencia</span>
