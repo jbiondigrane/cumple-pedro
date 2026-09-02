@@ -653,9 +653,22 @@
         <option value="No puedo ir 😢">No puedo ir 😢</option>
       </select>
       <textarea id="asist-comentario" placeholder="¿Algo para tener en cuenta? (opcional)" rows="3" style="width:100%; padding:14px 16px; border-radius:12px; border:2px solid #90caf9; font-size:16px; outline:none; font-family:inherit; resize:none; color:#0d47a1;"></textarea>
-      <button class="btn-confirmar" onclick="enviarConfirmacion()">Confirmar</button>
+      <button class="btn-confirmar" id="btn-enviar-confirmacion" onclick="enviarConfirmacion()">Confirmar</button>
+      <p id="confirmacion-gracias" class="recordatorio" style="display:none;">¡Gracias por confirmar! 🎉</p>
     </div>
   </div>
+
+  <!-- IFRAME OCULTO PARA ENVIAR EL GOOGLE FORM SIN SALIR DE LA PÁGINA -->
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+  <form id="form-asistencia-google"
+        action="https://docs.google.com/forms/d/e/1FAIpQLSc4MhS5p8s1RX1xLcb8n-vdgxJWFdRqPiizPPciWDTG8VPY-A/formResponse"
+        method="POST" target="hidden_iframe" style="display:none;">
+    <input type="text" name="entry.1589233075" id="google-pais" />
+    <input type="text" name="entry.1668936411" id="google-nombre" />
+    <input type="text" name="entry.968918785" id="google-cantidad" />
+    <input type="text" name="entry.1479890165" id="google-confirma" />
+    <input type="text" name="entry.35067729" id="google-comentario" />
+  </form>
 
   <!-- CÓMO LLEGAR -->
   <div id="seccion-llegar" class="seccion">
@@ -744,17 +757,15 @@
         return;
       }
 
-      const destinatario = 'josefinabg@hotmail.com';
-      const asunto = `Confirmación cumple Pedro - ${nombre}`;
-      const cuerpo =
-        `País: ${paisAsistenciaSeleccionado}\n` +
-        `Nombre: ${nombre}\n` +
-        `Cuántos vienen: ${cantidad || '-'}\n` +
-        `Confirma: ${confirma}\n` +
-        `Comentario: ${comentario || '-'}`;
+      document.getElementById('google-pais').value = paisAsistenciaSeleccionado;
+      document.getElementById('google-nombre').value = nombre;
+      document.getElementById('google-cantidad').value = cantidad;
+      document.getElementById('google-confirma').value = confirma;
+      document.getElementById('google-comentario').value = comentario;
+      document.getElementById('form-asistencia-google').submit();
 
-      const mailtoUrl = `mailto:${destinatario}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
-      window.location.href = mailtoUrl;
+      document.querySelector('.form-asistencia').querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = true);
+      document.getElementById('confirmacion-gracias').style.display = 'block';
     }
 
     const historial = ['bienvenida'];
