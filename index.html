@@ -357,9 +357,20 @@
       position: absolute;
       right: -20px;
       top: 50%;
-      transform: translate(60%, -50%);
       height: 140px;
       width: auto;
+      animation: zorroEntrada 0.7s ease forwards;
+    }
+
+    @keyframes zorroEntrada {
+      from {
+        transform: translate(220%, -50%);
+        opacity: 0;
+      }
+      to {
+        transform: translate(60%, -50%);
+        opacity: 1;
+      }
     }
 
     @media (max-width: 700px) {
@@ -512,18 +523,20 @@
     .pais-selector {
       display: flex;
       gap: 12px;
+      margin-top: 16px;
     }
 
     .pais-btn {
       flex: 1;
-      padding: 14px;
+      padding: 14px 10px;
       border-radius: 12px;
       border: 2px solid #90caf9;
       background: white;
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 600;
       color: #0d47a1;
       cursor: pointer;
+      white-space: nowrap;
       transition: border-color 0.15s, background 0.15s;
     }
 
