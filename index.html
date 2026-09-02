@@ -191,8 +191,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 40px 20px 20px;
+      justify-content: space-between;
+      padding: 20px 20px 10px;
     }
 
     #pantalla-menu h2 {
@@ -240,12 +240,26 @@
     .menu-animales-abajo {
       width: calc(100% + 40px);
       max-width: 520px;
-      margin: auto -20px 0 -20px;
+      margin: 0 -20px;
     }
 
     @media (max-width: 700px) {
       .menu-fila span {
         font-size: 28px;
+      }
+
+      .menu-guirnalda {
+        max-width: 280px;
+      }
+
+      .menu-animales-abajo {
+        width: calc(100% + 20px);
+        max-width: 340px;
+        margin: 0 -10px;
+      }
+
+      .menu-opciones {
+        gap: 16px;
       }
     }
 
