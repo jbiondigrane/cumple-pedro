@@ -101,6 +101,12 @@
       flex-direction: column;
       align-items: center;
       gap: 6px;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .std-fecha:hover {
+      transform: scale(1.05);
     }
 
     .std-bandera {
@@ -555,11 +561,11 @@
     <div class="save-the-date">
       <p class="std-titulo">Save the date</p>
       <div class="std-fechas">
-        <div class="std-fecha">
+        <div class="std-fecha" onclick="agregarCalendario('uru')">
           <span class="std-bandera">🇺🇾</span>
           <span class="std-info">19/09 · 12hs</span>
         </div>
-        <div class="std-fecha">
+        <div class="std-fecha" onclick="agregarCalendario('arg')">
           <span class="std-bandera">🇦🇷</span>
           <span class="std-info">26/09 · 12hs</span>
         </div>
@@ -728,6 +734,48 @@
     }
 
     let paisAsistenciaSeleccionado = '';
+
+    function agregarCalendario(pais) {
+      const info = pais === 'uru'
+        ? {
+            start: '20260919T150000Z',
+            end: '20260919T180000Z',
+            loc: 'Av. María Saldún de Rodríguez 2350, Montevideo, Uruguay',
+            title: 'Cumpleaños de Pedro 🎉 (Uruguay)',
+          }
+        : {
+            start: '20260926T150000Z',
+            end: '20260926T180000Z',
+            loc: 'Rocamora 409, Concepción del Uruguay, Entre Ríos, Argentina',
+            title: 'Cumpleaños de Pedro 🎉 (Argentina)',
+          };
+
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Cumple Pedro//ES',
+        'BEGIN:VEVENT',
+        `UID:${Date.now()}-${pais}@cumplepedro`,
+        `DTSTAMP:${info.start}`,
+        `DTSTART:${info.start}`,
+        `DTEND:${info.end}`,
+        `SUMMARY:${info.title}`,
+        `LOCATION:${info.loc}`,
+        'DESCRIPTION:Primer cumpleaños de Pedro',
+        'END:VEVENT',
+        'END:VCALENDAR',
+      ].join('\r\n');
+
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `cumple-pedro-${pais}.ics`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
 
     function seleccionarPais(pais) {
       paisAsistenciaSeleccionado = pais === 'uru' ? 'Uruguay' : 'Argentina';
