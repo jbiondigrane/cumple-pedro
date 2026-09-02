@@ -44,6 +44,12 @@
       font-weight: 700;
     }
 
+    @media (max-width: 700px) {
+      #btn-volver-fijo {
+        display: none !important;
+      }
+    }
+
     /* ---- PANTALLA BIENVENIDA ---- */
     #pantalla-bienvenida {
       display: flex;
@@ -59,6 +65,13 @@
       width: 80%;
       max-width: 380px;
       margin-bottom: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .hero-lion {
+        max-width: 220px;
+        margin-bottom: 6px;
+      }
     }
 
     h1 {
@@ -203,9 +216,9 @@
     }
 
     .menu-guirnalda {
-      width: 100%;
-      max-width: 420px;
-      margin-bottom: 12px;
+      width: calc(100% + 40px);
+      max-width: 520px;
+      margin: 0 -20px 12px -20px;
     }
 
     .menu-opciones {
@@ -249,17 +262,27 @@
       }
 
       .menu-guirnalda {
-        max-width: 280px;
+        width: calc(100% + 20px);
+        max-width: 320px;
+        margin: 0 -10px 8px -10px;
       }
 
       .menu-animales-abajo {
         width: calc(100% + 20px);
-        max-width: 340px;
+        max-width: 300px;
         margin: 0 -10px;
       }
 
       .menu-opciones {
-        gap: 16px;
+        gap: 12px;
+      }
+
+      h1 {
+        margin-bottom: 16px;
+      }
+
+      .save-the-date {
+        margin-bottom: 20px;
       }
     }
 
