@@ -211,12 +211,18 @@
 
     .menu-guirnalda {
       width: calc(100% + 40px);
-      height: 90px;
       margin: 0 -20px 12px -20px;
-      background-image: url('guirnarldas_transp.png');
-      background-repeat: repeat-x;
-      background-size: auto 100%;
-      background-position: left center;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .menu-guirnalda img {
+      height: 90px;
+      width: auto;
+      flex-shrink: 0;
+      display: block;
     }
 
     .menu-opciones {
@@ -251,7 +257,7 @@
     .menu-animales-abajo {
       width: calc(100% + 40px);
       max-width: 600px;
-      margin: 0 -20px 1cm -20px;
+      margin: 0 -20px 0.5cm -20px;
     }
 
     @media (max-width: 700px) {
@@ -261,14 +267,17 @@
 
       .menu-guirnalda {
         width: calc(100% + 20px);
-        height: 60px;
         margin: 0 -10px 8px -10px;
+      }
+
+      .menu-guirnalda img {
+        height: 60px;
       }
 
       .menu-animales-abajo {
         width: calc(100% + 20px);
         max-width: 380px;
-        margin: 0 -10px 1cm -10px;
+        margin: 0 -10px 0.5cm -10px;
       }
 
       .menu-opciones {
@@ -632,7 +641,11 @@
   <div id="pantalla-menu">
     <div id="menu-bg"></div>
     <div id="menu-content">
-      <div class="menu-guirnalda"></div>
+      <div class="menu-guirnalda">
+        <img src="guirnarldas_transp.png" alt="guirnalda" />
+        <img src="guirnarldas_transp.png" alt="guirnalda" />
+        <img src="guirnarldas_transp.png" alt="guirnalda" />
+      </div>
       <div class="menu-opciones">
         <div class="menu-fila" onclick="mostrar('asistencia')">
           <span>Confirmar asistencia</span>
