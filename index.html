@@ -979,7 +979,7 @@
     const fotosPorMes = {
       1: [1,2,3,4,5,6,7,8,10,11,12,14,15,16,17,18,19,20,21,22,23,24,25,26].map(n => `1_mes/foto_${n}.jpeg`),
       2: [32,33,34,35,36,37,38,15,16,5,9,30,12,7,4,23,26,25,19,11,24,21,31,17,27,6,28,8,29,14].map(n => `2_mes/foto_${n}.jpeg`),
-      3: Array.from({length: 24}, (_, i) => `3_mes/foto_${i+1}.jpeg`),
+      3: [24,25,26,27,28,29,30,6,12,23,10,20,9,15,13,7,22,4,3,16,17,19,21].map(n => `3_mes/foto_${n}.jpeg`),
       4: Array.from({length: 34}, (_, i) => `4_mes/foto_${i+1}.jpeg`),
       5: Array.from({length: 27}, (_, i) => `5_mes/foto_${i+1}.jpeg`),
       6: Array.from({length: 23}, (_, i) => `6_mes/foto_${i+1}.jpeg`),
@@ -998,10 +998,13 @@
     const fondosPorMes = {
       1: 'mes0_fondo.jpeg',
       2: 'mes1_fondo.jpeg',
+      3: 'mes2_fondo.jpeg',
     };
 
     const subtitulosPorMes = {
       1: '16/09 - 16/10',
+      2: '16/10 - 16/11',
+      3: '16/11 - 16/12',
     };
 
     function abrirMes(num) {
