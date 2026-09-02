@@ -614,11 +614,35 @@
     }
 
     #fotos-mes-content h2 {
-      font-family: 'Give You Glory', cursive;
-      font-weight: 400;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
       color: #0d47a1;
+      margin-bottom: 4px;
+      font-size: 22px;
+    }
+
+    #fotos-mes-subtitulo {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: #4a72b5;
+      font-size: 16px;
       margin-bottom: 20px;
-      font-size: clamp(32px, 6vw, 44px);
+      display: none;
+    }
+
+    @media (max-width: 700px) {
+      #fotos-mes-content h2 {
+        font-size: 19px;
+      }
+    }
+
+    #seccion-fotos-mes.fondo-mes0 {
+      background-image: url('mes0_fondo.jpeg');
+      background-size: 300px auto;
+      background-repeat: repeat;
     }
 
     .fotos-grid {
@@ -760,7 +784,8 @@
   <!-- FOTOS DEL MES -->
   <div id="seccion-fotos-mes" class="seccion">
     <div id="fotos-mes-content">
-      <h2 id="fotos-mes-titulo">📸 1 mes</h2>
+      <h2 id="fotos-mes-titulo">1 mes</h2>
+      <p id="fotos-mes-subtitulo">16/09 - 16/10</p>
       <div class="fotos-grid" id="fotos-grid"></div>
     </div>
   </div>
@@ -953,7 +978,7 @@
 
     // Fotos por mes
     const fotosPorMes = {
-      1: Array.from({length: 30}, (_, i) => `1_mes/foto_${i+1}.jpeg`),
+      1: Array.from({length: 26}, (_, i) => `1_mes/foto_${i+1}.jpeg`),
       2: Array.from({length: 31}, (_, i) => `2_mes/foto_${i+1}.jpeg`),
       3: Array.from({length: 24}, (_, i) => `3_mes/foto_${i+1}.jpeg`),
       4: Array.from({length: 34}, (_, i) => `4_mes/foto_${i+1}.jpeg`),
@@ -974,8 +999,21 @@
     function abrirMes(num) {
       const fotos = fotosPorMes[num];
       if (!fotos) return;
-      const label = num === 1 ? '1 mes' : `${num} meses`;
-      document.getElementById('fotos-mes-titulo').textContent = `📸 ${label}`;
+      const edad = num - 1;
+      const label = edad === 1 ? '1 mes' : `${edad} meses`;
+      document.getElementById('fotos-mes-titulo').textContent = label;
+
+      const subtitulo = document.getElementById('fotos-mes-subtitulo');
+      const seccion = document.getElementById('seccion-fotos-mes');
+      if (num === 1) {
+        subtitulo.textContent = '16/09 - 16/10';
+        subtitulo.style.display = 'block';
+        seccion.classList.add('fondo-mes0');
+      } else {
+        subtitulo.style.display = 'none';
+        seccion.classList.remove('fondo-mes0');
+      }
+
       const grid = document.getElementById('fotos-grid');
       grid.innerHTML = '';
       fotos.forEach(src => {
