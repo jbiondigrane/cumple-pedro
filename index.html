@@ -183,12 +183,39 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 480px;
+      max-width: 900px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 20px;
+    }
+
+    .menu-layout {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .menu-oso {
+      width: 40%;
+      max-width: 280px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 700px) {
+      .menu-layout {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .menu-oso {
+        width: 55%;
+        max-width: 220px;
+      }
     }
 
     #pantalla-menu h2 {
@@ -200,6 +227,8 @@
 
     .menu-opciones {
       width: 100%;
+      max-width: 480px;
+      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -583,19 +612,22 @@
   <div id="pantalla-menu">
     <div id="menu-bg"></div>
     <div id="menu-content">
-<div class="menu-opciones">
-        <button class="menu-btn" onclick="mostrar('asistencia')">
-          <img src="leon_transp.png" class="icono-leon" alt="león" />
-          <span>Confirmar asistencia</span>
-        </button>
-        <button class="menu-btn" onclick="mostrar('llegar')">
-          <span class="icono">📍</span>
-          <span>Cómo llegar</span>
-        </button>
-        <button class="menu-btn" onclick="mostrar('galeria')">
-          <img src="camara_transp.png" class="icono-img" alt="cámara" />
-          <span>Ir a galería de fotos</span>
-        </button>
+      <div class="menu-layout">
+        <img src="menu_transp.png" alt="oso con torta" class="menu-oso" />
+        <div class="menu-opciones">
+          <button class="menu-btn" onclick="mostrar('asistencia')">
+            <img src="leon_transp.png" class="icono-leon" alt="león" />
+            <span>Confirmar asistencia</span>
+          </button>
+          <button class="menu-btn" onclick="mostrar('llegar')">
+            <span class="icono">📍</span>
+            <span>Cómo llegar</span>
+          </button>
+          <button class="menu-btn" onclick="mostrar('galeria')">
+            <img src="camara_transp.png" class="icono-img" alt="cámara" />
+            <span>Ir a galería de fotos</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
