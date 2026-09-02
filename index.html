@@ -192,7 +192,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 40px 20px 20px;
     }
 
     #pantalla-menu h2 {
@@ -207,23 +207,21 @@
       max-width: 480px;
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 24px;
+      margin-bottom: 24px;
     }
 
     .menu-fila {
       display: flex;
       align-items: center;
-      gap: 20px;
+      justify-content: center;
       cursor: pointer;
       transition: transform 0.15s;
     }
 
     .menu-fila:hover {
       transform: translateX(4px);
-    }
-
-    .menu-fila-derecha {
-      justify-content: space-between;
     }
 
     .menu-fila span {
@@ -233,21 +231,15 @@
       color: #0d47a1;
     }
 
-    .menu-animal {
-      width: 16.67vw;
-      height: 23.6vw;
-      object-fit: contain;
-      flex-shrink: 0;
+    .menu-animales-abajo {
+      width: 100%;
+      max-width: 420px;
+      margin-top: auto;
     }
 
     @media (max-width: 700px) {
       .menu-fila span {
         font-size: 28px;
-      }
-
-      .menu-animal {
-        width: 33.3vw;
-        height: 47.2vw;
       }
     }
 
@@ -601,18 +593,16 @@
     <div id="menu-content">
       <div class="menu-opciones">
         <div class="menu-fila" onclick="mostrar('asistencia')">
-          <img src="menu_transp.png" alt="oso con torta" class="menu-animal" />
           <span>Confirmar asistencia</span>
         </div>
-        <div class="menu-fila menu-fila-derecha" onclick="mostrar('llegar')">
+        <div class="menu-fila" onclick="mostrar('llegar')">
           <span>Cómo llegar</span>
-          <img src="cebra_transp.png" alt="cebra" class="menu-animal" />
         </div>
         <div class="menu-fila" onclick="mostrar('galeria')">
-          <img src="jirafa_transp.png" alt="jirafa" class="menu-animal" />
-          <span>Ir a galería de fotos</span>
+          <span>Ver galería de fotos</span>
         </div>
       </div>
+      <img src="menu_2_transp.png" alt="animales de cumpleaños" class="menu-animales-abajo" />
     </div>
   </div>
 
