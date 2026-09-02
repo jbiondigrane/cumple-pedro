@@ -331,6 +331,31 @@
       margin-bottom: 20px;
     }
 
+    #seccion-asistencia, #seccion-asistencia * {
+      font-family: 'Oswald', sans-serif !important;
+    }
+
+    #seccion-asistencia h2 {
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-size: clamp(26px, 6vw, 38px);
+      margin-bottom: 0;
+    }
+
+    .titulo-con-animal {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .animal-titulo-derecha {
+      height: 70px;
+      width: auto;
+    }
+
     .seccion p {
       color: #1565c0;
       font-size: 16px;
@@ -506,15 +531,21 @@
     }
 
     .btn-confirmar {
-      background: #0d47a1;
+      background-color: #4a72b5;
       color: white;
       border: none;
-      border-radius: 12px;
+      border-radius: 50px;
       padding: 14px;
       font-size: 17px;
       font-weight: 600;
       cursor: pointer;
       margin-top: 4px;
+      box-shadow: 0 4px 14px rgba(74,114,181,0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-confirmar:hover {
+      transform: translateY(-2px);
     }
 
     /* Mapa placeholder */
@@ -705,10 +736,12 @@
 
   <!-- ASISTENCIA -->
   <div id="seccion-asistencia" class="seccion">
-    <h2><img src="leon_transp.png" alt="león" style="height:64px; width:auto; vertical-align:middle; margin-right:6px;" /> Confirmar asistencia</h2>
+    <div class="titulo-con-animal">
+      <h2>Confirmar asistencia</h2>
+      <img src="zorro_transp.png" alt="zorro" class="animal-titulo-derecha" />
+    </div>
     <div class="form-asistencia">
 
-      <p style="font-weight:600; color:#0d47a1; margin-bottom:4px;">¿Dónde vas a asistir?</p>
       <div class="pais-selector">
         <button type="button" class="pais-btn" id="btn-uru" onclick="seleccionarPais('uru')">
           🇺🇾 Uruguay
